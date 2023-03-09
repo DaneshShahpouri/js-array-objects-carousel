@@ -69,14 +69,22 @@ let mainText;
 
 let thumbnailsImgElement;
 
+let isInvert = false;
+
 //variabili elementi genitori
 const bigImgWrapperElement = document.getElementById('img-wrapper');
 const thumbnailsSliderElement = document.getElementById('thumbnails-slider');
-const textWrapperElement = document.getElementById('text-wrapper')
+const textWrapperElement = document.getElementById('text-wrapper');
 
 //Variabili bottoni
-const btnUp = document.getElementById('up')
-const btnDown = document.getElementById('down')
+const btnUp = document.getElementById('up');
+const btnDown = document.getElementById('down');
+
+const btnPlay = document.getElementById('btn-play');
+const btnPause = document.getElementById('btn-pause');
+
+const invertOffBtn = document.getElementById('inver-off');
+const invertOnBtn = document.getElementById('inver-on');
 //-------------------------------------------------------
 // fine Variabili
 
@@ -104,22 +112,107 @@ for(let i = 0; i < images.length; i++){
     thumbnailsImgElement[i].src = "./" +images[i].image
 }
 
-thumbnailsImgElement[0].style.opacity= "1"
+thumbnailsImgElement[0].style.opacity= "1";
+thumbnailsImgElement[variabileContatoreGlobale].style.border = '3px solid white';
+
+    invertOffBtn.disabled = true;
+    invertOnBtn.disabled = true;
+
+    invertOffBtn.style.background = 'grey';
+    invertOnBtn.style.background = 'grey';
+    
+    invertOffBtn.style.cursor = 'unset';
+    invertOnBtn.style.cursor = 'unset';
 
 
+let autoPlay = setInterval(() => {
+    textWrapperElement.innerHTML = '';
+
+    downBtnBehavior();
+}, 3000)
 
 
 // inizio Eventi
 //-------------------------------------------------------
+invertOffBtn.addEventListener('click', ()=>{
+    isInvert=true;
+
+    invertOffBtn.classList.toggle('hidden');
+    invertOnBtn.classList.toggle('hidden');
+
+    console.log(isInvert)
+});
+
+invertOnBtn.addEventListener('click', ()=>{
+    isInvert=false;
+
+    invertOffBtn.classList.toggle('hidden');
+    invertOnBtn.classList.toggle('hidden');
+
+    console.log(isInvert)
+});
+
+btnPause.addEventListener('click', ()=>{
+    
+    invertOffBtn.disabled = false;
+    invertOnBtn.disabled = false;
+
+    invertOffBtn.style.background = '';
+    invertOnBtn.style.background = '';
+
+    invertOffBtn.style.cursor = '';
+    invertOnBtn.style.cursor = '';
+    
+
+    clearInterval(autoPlay);
+
+    btnPause.classList.toggle('hidden');
+    btnPlay.classList.toggle('hidden');
+});
+
+btnPlay.addEventListener('click', ()=>{
+
+    invertOffBtn.disabled = true;
+    invertOnBtn.disabled = true;
+
+    invertOffBtn.style.background = 'grey';
+    invertOnBtn.style.background = 'grey';
+    
+    invertOffBtn.style.cursor = 'unset';
+    invertOnBtn.style.cursor = 'unset';
+    
+
+    if(isInvert){
+        autoPlay = setInterval(() => {
+            textWrapperElement.innerHTML = '';
+        
+            upBtnBehavior();
+        }, 3000)
+        
+    }else {
+        autoPlay = setInterval(() => {
+        textWrapperElement.innerHTML = '';
+    
+        downBtnBehavior();
+    }, 3000)
+}    
+    btnPause.classList.toggle('hidden');
+    btnPlay.classList.toggle('hidden');
+})
 
 btnUp.addEventListener('click', () => {
-    
+   
+    textWrapperElement.innerHTML = '';
+
     upBtnBehavior()
 
     //console.log(variabileContatoreGlobale)
 })
 
 btnDown.addEventListener('click', () => {
+
+    textWrapperElement.innerHTML = '';
+
     downBtnBehavior();
 
     //console.log(variabileContatoreGlobale)
@@ -168,30 +261,58 @@ function downLimited(arr){
 
 function upBtnBehavior(){
 
-    thumbnailsImgElement[variabileContatoreGlobale].style.opacity = '.4'
+    thumbnailsImgElement[variabileContatoreGlobale].style.opacity = '.4';
+    thumbnailsImgElement[variabileContatoreGlobale].style.border = '0';
+    
+
     variabileContatoreGlobale--;
     downLimited(images);
+
+    createElementAppend('h4', 'title', '', textWrapperElement, 1);
+    mainTitle = document.querySelector('.title');
+    mainTitle.innerText = images[variabileContatoreGlobale].title;
+
+    createElementAppend('p', 'paragraph', '', textWrapperElement, 1);
+    mainText = document.querySelector('.paragraph');
+    mainText.innerText = images[variabileContatoreGlobale].text;
 
     mainImg.src = `./${images[variabileContatoreGlobale].image}`;
     mainTitle.innerText = images[variabileContatoreGlobale].title;
     mainText.innerText = images[variabileContatoreGlobale].text;
 
-    thumbnailsImgElement[variabileContatoreGlobale].style.opacity = '1'
+    thumbnailsImgElement[variabileContatoreGlobale].style.opacity = '1';
+    thumbnailsImgElement[variabileContatoreGlobale].style.border = '3px solid white';
+    mainTitle.classList.add('text-animation');
+    mainText.classList.add('text-animation-2');
 
 }
 
 function downBtnBehavior(){
 
-    thumbnailsImgElement[variabileContatoreGlobale].style.opacity = '.4'
+    thumbnailsImgElement[variabileContatoreGlobale].style.opacity = '.4';
+    thumbnailsImgElement[variabileContatoreGlobale].style.border = '0';
+
     variabileContatoreGlobale++;
     upLimited(images);
+
+    createElementAppend('h4', 'title', '', textWrapperElement, 1);
+    mainTitle = document.querySelector('.title');
+    mainTitle.innerText = images[variabileContatoreGlobale].title;
+
+    createElementAppend('p', 'paragraph', '', textWrapperElement, 1);
+    mainText = document.querySelector('.paragraph');
+    mainText.innerText = images[variabileContatoreGlobale].text;
 
     mainImg.src = `./${images[variabileContatoreGlobale].image}`;
     mainTitle.innerText = images[variabileContatoreGlobale].title;
     mainText.innerText = images[variabileContatoreGlobale].text;
 
    
-    thumbnailsImgElement[variabileContatoreGlobale].style.opacity = '1'
+    thumbnailsImgElement[variabileContatoreGlobale].style.opacity = '1';
+    thumbnailsImgElement[variabileContatoreGlobale].style.border = '3px solid white';
+    mainTitle.classList.add('text-animation');
+    mainText.classList.add('text-animation-2');
 }
+
 //-------------------------------------------------------
 // fine Function

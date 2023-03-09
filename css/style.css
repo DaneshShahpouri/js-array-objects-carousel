@@ -64,6 +64,7 @@ COMMONS */
 
 .container{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
@@ -82,6 +83,10 @@ COMMONS */
     /* debug */
     background: rgba(0,0,0,.5);
     /* debug */
+
+    overflow: hidden;
+
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.265);
 }
 
 #img-wrapper{
@@ -92,6 +97,20 @@ COMMONS */
      background: rgba(0,0,0,.2);
      height: 100%;
      /* debug */
+}
+
+.backgroundRot{
+    position: absolute;
+    bottom: -100%; left:-10%;
+
+
+    width: 130%; height: 500px;
+    background: rgba(0, 0, 0, 0.765);
+    transform: rotate(-20deg);
+    box-shadow: -2px -2px 15px rgba(0, 0, 0, 0.3);
+    filter: blur(50px);
+
+    z-index: 1;
 }
 
 #img-wrapper .image{
@@ -111,6 +130,8 @@ COMMONS */
     background: rgba(0,0,0,1);
     height: 100%;
     /* debug */
+
+    z-index: 2;
 }
 
 #text-wrapper{
@@ -123,9 +144,13 @@ COMMONS */
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    z-index: 2;
 }
 
 .title{
+    position: relative;
+    left: 0; bottom: 0;
     font-size: 1.2em;
     text-align: right;
 
@@ -137,6 +162,8 @@ COMMONS */
 }
 
 .paragraph{
+    position: relative;
+    left: 0; bottom: 0;
     text-align: right;
 
     padding-bottom: 1em;
@@ -152,4 +179,66 @@ COMMONS */
     object-fit: cover;
 
     opacity: .4;
+}
+
+.text-animation{  
+    animation: textAnimation 1s;
+}
+.text-animation-2{  
+    animation: textAnimation 1.2s;
+}
+
+/* Console */
+
+.console{
+    padding: 2em;
+    position: relative;
+
+    display: flex;
+    gap: 200px;
+}
+
+.inver-wrapper,
+.icon-wrapper{
+    position: relative;
+}
+
+#inver-off,
+#inver-on,
+#btn-play,
+#btn-pause{
+    position: absolute;
+    width: 80px;
+    height: 30px;
+    transform: translateX(-50%);
+    cursor: pointer;
+    border: 0;
+    border-radius: 8px;
+    background: rgb(10, 16, 31);
+    color: white;
+}
+
+#inver-off:hover,
+#inver-on:hover,
+#btn-play:hover,
+#btn-pause:hover{
+   background: rgb(36, 43, 178);
+}
+
+.hidden{
+    display: none;
+}
+
+
+/* ANIMATION */
+@keyframes textAnimation {
+    0%{
+        left:20px; bottom: 0;
+        opacity: 0;
+    }
+
+    100%{
+        left:0px; bottom: 0;
+        opacity: 1;
+    }
 }

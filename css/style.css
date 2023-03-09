@@ -10,6 +10,55 @@
     margin-left: auto;
 }
 
+.btn-arrow{
+    position: absolute;
+    left: 50%;
+
+    margin: 5px 0;
+    width: 35px; height: 35px;
+    font-size: 2em;
+    z-index: 1;
+
+    border-radius: 50%;
+    border: 2px solid transparent;
+
+    background: rgba(223, 223, 223, 0.4);
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0);
+
+    transform: translateX(-50%);
+
+    cursor: pointer;
+
+    transition: all .2s;
+}
+
+.btn-arrow i{
+    opacity: .5;
+    transition: all .4s;
+}
+
+.btn-arrow:hover{
+    background: white;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.btn-arrow:hover > i{
+    opacity: 1;
+}
+
+.btn-arrow:active{
+    background: rgb(125, 125, 125);
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0);
+}
+
+#up{
+    top: 0;  
+}
+
+#down{
+    bottom: 0;
+}
+
 /*-----------------------------
 COMMONS */
 
@@ -20,25 +69,23 @@ COMMONS */
 
     width: 100%;
     height: 100vh;
-
-    /* debug */
-    background: rgba(0,0,0,.5);
-    /* debug */
 }
 
 .container .carousel-wrapper{
     display: flex;
 
-    width: 80%;
+    width: 90%;
     height: 400px;
+
+    position: relative;
 
     /* debug */
     background: rgba(0,0,0,.5);
     /* debug */
 }
 
-.img-wrapper{
-    width:70%;
+#img-wrapper{
+    width:75%;
     overflow: hidden;
 
      /* debug */
@@ -47,14 +94,62 @@ COMMONS */
      /* debug */
 }
 
-.img-wrapper img{
+#img-wrapper .image{
+    width: 100%;
     height: 100%;
+
+    object-fit: cover;
+   
+    overflow: hidden;
 }
 
-.thumbnails{
-    width: 30%;
+#thumbnails-slider{
+    width: 25%;
+    position: relative;
+
     /* debug */
-    background: rgba(0,0,0,.4);
+    background: rgba(0,0,0,1);
     height: 100%;
     /* debug */
+}
+
+#text-wrapper{
+    position: absolute;
+    left:0; bottom: 0;
+
+    width: 75%;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.title{
+    font-size: 1.2em;
+    text-align: right;
+
+    padding-bottom: .2em;
+    padding-right: 1em;
+    padding-left: 1em;
+
+    text-shadow: 2px 2px 2px black;
+}
+
+.paragraph{
+    text-align: right;
+
+    padding-bottom: 1em;
+    padding-right: 1em;
+    padding-left: 1em;
+
+    text-shadow: 2px 2px 2px black;
+}
+
+.thumbnail{
+    display: block;
+    width: 100%;
+    object-fit: cover;
+
+    opacity: .4;
 }

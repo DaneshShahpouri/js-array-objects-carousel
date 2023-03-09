@@ -26,11 +26,10 @@
 
 
 
-
-
 // Variabili
 //-------------------------------------------------------
 
+//Array img
 const images = [
     {
         image: 'img/01.webp',
@@ -63,16 +62,71 @@ const images = [
     }
 ];
 
+let variabileContatoreGlobale = 0;
+let mainImg;
+let mainTitle;
+let mainText;
+
+let thumbnailsImgElement;
+
+//variabili elementi genitori
+const bigImgWrapperElement = document.getElementById('img-wrapper');
+const thumbnailsSliderElement = document.getElementById('thumbnails-slider');
+const textWrapperElement = document.getElementById('text-wrapper')
+
+//Variabili bottoni
+const btnUp = document.getElementById('up')
+const btnDown = document.getElementById('down')
 //-------------------------------------------------------
 // fine Variabili
 
 
+createElementAppend('img', 'image', '', bigImgWrapperElement, 1);
+mainImg = document.querySelector('.image');
+mainImg.src = `./${images[0].image}`;
+
+createElementAppend('h4', 'title', '', textWrapperElement, 1);
+mainTitle = document.querySelector('.title');
+mainTitle.innerText = images[0].title;
+
+createElementAppend('p', 'paragraph', '', textWrapperElement, 1);
+mainText = document.querySelector('.paragraph');
+mainText.innerText = images[0].text;
+
+
+createElementAppend('img', 'thumbnail', '', thumbnailsSliderElement, images.length);
+thumbnailsImgElement = document.querySelectorAll('.thumbnail');
+
+
+//Bonus
+for(let i = 0; i < images.length; i++){
+    thumbnailsImgElement[i].style.height = `calc(100% / ${images.length})`;
+    thumbnailsImgElement[i].src = "./" +images[i].image
+}
+
+thumbnailsImgElement[0].style.opacity= "1"
 
 
 
 
+// inizio Eventi
+//-------------------------------------------------------
 
+btnUp.addEventListener('click', () => {
+    
+    upBtnBehavior()
 
+    //console.log(variabileContatoreGlobale)
+})
+
+btnDown.addEventListener('click', () => {
+    downBtnBehavior();
+
+    //console.log(variabileContatoreGlobale)
+})
+
+//-------------------------------------------------------
+// fine Eventi
 
 
 // inizio Function
@@ -92,5 +146,52 @@ function createElementAppend (elementoDaCreare, classe, contenuto, elementoGenit
     }
 }
 
+/**
+ * Limita il valore della variabileGlobale in crescenza
+ * @returns {any}
+ */
+function upLimited(arr){
+    if(variabileContatoreGlobale > arr.length-1){
+        variabileContatoreGlobale = 0;
+    }
+}
+
+/**
+ * Limita il valore della variabileGlobale in decrescenza
+ * @returns {any}
+ */
+function downLimited(arr){
+    if(variabileContatoreGlobale < 0){
+        variabileContatoreGlobale = arr.length-1;
+    }
+}
+
+function upBtnBehavior(){
+
+    thumbnailsImgElement[variabileContatoreGlobale].style.opacity = '.4'
+    variabileContatoreGlobale--;
+    downLimited(images);
+
+    mainImg.src = `./${images[variabileContatoreGlobale].image}`;
+    mainTitle.innerText = images[variabileContatoreGlobale].title;
+    mainText.innerText = images[variabileContatoreGlobale].text;
+
+    thumbnailsImgElement[variabileContatoreGlobale].style.opacity = '1'
+
+}
+
+function downBtnBehavior(){
+
+    thumbnailsImgElement[variabileContatoreGlobale].style.opacity = '.4'
+    variabileContatoreGlobale++;
+    upLimited(images);
+
+    mainImg.src = `./${images[variabileContatoreGlobale].image}`;
+    mainTitle.innerText = images[variabileContatoreGlobale].title;
+    mainText.innerText = images[variabileContatoreGlobale].text;
+
+   
+    thumbnailsImgElement[variabileContatoreGlobale].style.opacity = '1'
+}
 //-------------------------------------------------------
 // fine Function

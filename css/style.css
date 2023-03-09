@@ -1,0 +1,60 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.center{
+    max-width: 1000px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/*-----------------------------
+COMMONS */
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100vh;
+
+    /* debug */
+    background: rgba(0,0,0,.5);
+    /* debug */
+}
+
+.container .carousel-wrapper{
+    display: flex;
+
+    width: 80%;
+    height: 400px;
+
+    /* debug */
+    background: rgba(0,0,0,.5);
+    /* debug */
+}
+
+.img-wrapper{
+    width:70%;
+    overflow: hidden;
+
+     /* debug */
+     background: rgba(0,0,0,.2);
+     height: 100%;
+     /* debug */
+}
+
+.img-wrapper img{
+    height: 100%;
+}
+
+.thumbnails{
+    width: 30%;
+    /* debug */
+    background: rgba(0,0,0,.4);
+    height: 100%;
+    /* debug */
+}

@@ -134,6 +134,40 @@ let autoPlay = setInterval(() => {
 
 // inizio Eventi
 //-------------------------------------------------------
+for(let i = 0; i < thumbnailsImgElement.length; i++){
+    thumbnailsImgElement[i].style.cursor = 'pointer'
+    thumbnailsImgElement[i].addEventListener('click', ()=>{
+
+        textWrapperElement.innerHTML = '';
+
+        thumbnailsImgElement[variabileContatoreGlobale].style.opacity = '.4';
+        thumbnailsImgElement[variabileContatoreGlobale].style.border = '0';
+        
+    
+        variabileContatoreGlobale = i;
+        downLimited(images);
+    
+        createElementAppend('h4', 'title', '', textWrapperElement, 1);
+        mainTitle = document.querySelector('.title');
+        mainTitle.innerText = images[variabileContatoreGlobale].title;
+    
+        createElementAppend('p', 'paragraph', '', textWrapperElement, 1);
+        mainText = document.querySelector('.paragraph');
+        mainText.innerText = images[variabileContatoreGlobale].text;
+    
+        mainImg.src = `./${images[variabileContatoreGlobale].image}`;
+        mainTitle.innerText = images[variabileContatoreGlobale].title;
+        mainText.innerText = images[variabileContatoreGlobale].text;
+    
+        thumbnailsImgElement[variabileContatoreGlobale].style.opacity = '1';
+        thumbnailsImgElement[variabileContatoreGlobale].style.border = '3px solid white';
+        mainTitle.classList.add('text-animation');
+        mainText.classList.add('text-animation-2');
+    })
+}
+    
+
+
 invertOffBtn.addEventListener('click', ()=>{
     isInvert=true;
 

@@ -174,7 +174,6 @@ invertOffBtn.addEventListener('click', ()=>{
     invertOffBtn.classList.toggle('hidden');
     invertOnBtn.classList.toggle('hidden');
 
-    console.log(isInvert)
 });
 
 invertOnBtn.addEventListener('click', ()=>{
@@ -183,7 +182,6 @@ invertOnBtn.addEventListener('click', ()=>{
     invertOffBtn.classList.toggle('hidden');
     invertOnBtn.classList.toggle('hidden');
 
-    console.log(isInvert)
 });
 
 btnPause.addEventListener('click', ()=>{
